@@ -8,7 +8,7 @@ class FirebaseService {
   final String collectionName = 'posts';
   static const int pageSize = 5;
 
-  // Yeni bir gönderi ekleme metodu
+  // Yeni gönderi ekleme metodu
   Future<void> addPost({
     required String header,
     required String body,

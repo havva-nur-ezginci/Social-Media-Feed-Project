@@ -13,7 +13,7 @@ class Post {
     this.imageUrl,
   });
 
-  // Firestore'dan alınan verilerle Post nesnesi oluşturma
+  // Firebase'den alınan verilerle Post nesnesi oluşturma
   factory Post.fromSnapshot(DocumentSnapshot snapshot) {
     var data = snapshot.data() as Map<String, dynamic>;
     return Post(
