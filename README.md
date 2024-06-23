@@ -1,6 +1,6 @@
 # Social-Media-Feed-Project
 
-Bu proje, Flutter kullanarak bir sosyal medya besleme uygulaması geliştirmek için tasarlanmıştır. Uygulama, kullanıcıların gönderileri görüntülemelerine ve kendi gönderilerini eklemelerine olanak tanır.
+Bu proje, Flutter kullanarak bir sosyal medya akış uygulaması geliştirmek için tasarlanmıştır. Uygulama, kullanıcıların gönderileri görüntülemelerine ve kendi gönderilerini eklemelerine olanak tanır.
 
 ## Özellikler
 - Akış: Kullanıcılara tarih sırasına göre sıralanmış gönderileri gösterir. Post body metni çok uzunsa kesme yapılmaktadır ve tamamı detay sayfasında görüntülenebilmektedir.
