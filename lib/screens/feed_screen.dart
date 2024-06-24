@@ -27,7 +27,7 @@ class _FeedPageState extends State<FeedPage> {
   void initState() {
     super.initState();
     _loadPosts(); // Gönderileri yükleme işlemi başlatılıyor
-    _scrollController.addListener(_scrollListener); // Liste dinleyici ekleniyor
+    _scrollController.addListener(_scrollListener);
   }
 
   @override
@@ -36,7 +36,7 @@ class _FeedPageState extends State<FeedPage> {
     super.dispose();
   }
 
-  // Gönderileri Firestore'dan yükleme işlemi
+  // Gönderileri Firebase'den yükleme işlemi
   Future<void> _loadPosts() async {
     setState(() {
       _isLoading = true; // Yükleme işlemi başladı
@@ -55,7 +55,7 @@ class _FeedPageState extends State<FeedPage> {
             : null; // Son yüklenen dokümanı güncelleme
       });
     } catch (e) {
-      print('Error loading posts: $e'); // Hata durumunda konsola hata yazdırma
+      print('Error loading posts: $e');
     } finally {
       setState(() {
         _isLoading = false; // Yükleme işlemi tamamlandı
@@ -75,23 +75,21 @@ class _FeedPageState extends State<FeedPage> {
     try {
       QuerySnapshot snapshot = await _firebaseService.getPosts(
           lastDocument:
-              _lastDocument); // Firestore'dan sonraki gönderileri getir
+              _lastDocument); // Firebase'den sonraki gönderileri getir
       List<Post> posts = snapshot.docs
           .map((doc) => Post.fromSnapshot(doc))
-          .toList(); // Gönderileri Post nesnesine dönüştürme
+          .toList(); // Gönderileri Post nesnesine dönüştür
       setState(() {
-        _posts.addAll(posts); // Varolan gönderilere yeni gönderileri ekleme
+        _posts.addAll(posts); // Varolan gönderilere yeni gönderileri ekle
         _lastDocument = snapshot.docs.isNotEmpty
             ? snapshot.docs.last
-            : null; // Son yüklenen dokümanı güncelleme
+            : null; // Son yüklenen dokümanı güncelle
       });
     } catch (e) {
-      print(
-          'Error loading more posts: $e'); // Hata durumunda konsola hata yazdırma
+      print('Error loading more posts: $e');
     } finally {
       setState(() {
-        _isLoadingMore =
-            false; // Daha fazla yükleme işlemi tamamlandı, gösterici gizleniyor
+        _isLoadingMore = false; // Daha fazla yükleme işlemi tamamlandı
       });
     }
   }
@@ -99,15 +97,9 @@ class _FeedPageState extends State<FeedPage> {
   // Liste scroll dinleyicisi
   void _scrollListener() {
     // Liste sonuna yaklaşıldığında ve daha fazla yükleme işlemi yoksa daha fazla gönderi yükle
-    //Mesafe 500 pikselden daha az  ve _isLoadingMore değeri false ise
     if (_scrollController.position.extentAfter < 500 && !_isLoadingMore) {
       _loadMorePosts();
     }
-  }
-
-  // Yeni gönderi oluşturulduğunda gönderileri yeniden yükle
-  void handleNewPostCreated() {
-    _loadPosts();
   }
 
   // Tarih formatlama işlemi
@@ -125,7 +117,7 @@ class _FeedPageState extends State<FeedPage> {
 
   Widget _buildPostBody(Post post) {
     const int maxLines = 6; // Gösterilecek maksimum satır sayısı
-    // Metin stilini ve rengini belirle
+
     final TextSpan postText = TextSpan(
       text: post.body,
       style: const TextStyle(color: Colors.black),
@@ -135,12 +127,8 @@ class _FeedPageState extends State<FeedPage> {
     final TextPainter textPainter = TextPainter(
       text: postText,
       maxLines: maxLines,
-      textDirection:
-          TextDirection.ltr, //(left-to-right), metin soldan sağa doğru akacak
-    )..layout(
-        minWidth: 0,
-        maxWidth: double
-            .infinity); //Belirli bir genişlik ve yükseklik içine yerleştir
+      textDirection: TextDirection.ltr, //(left-to-right)
+    )..layout(minWidth: 0, maxWidth: double.infinity);
 
     // Eğer metin belirtilen satır sayısından fazla ise kesme işlemi yap
     if (textPainter.didExceedMaxLines) {
@@ -160,7 +148,7 @@ class _FeedPageState extends State<FeedPage> {
         post.body,
         maxLines: maxLines,
         overflow: TextOverflow.ellipsis, // Fazla metni kes ve '...' ile göster
-        textAlign: TextAlign.justify, // Metni her iki kenara yasla
+        textAlign: TextAlign.justify,
       );
     }
   }
@@ -196,7 +184,6 @@ class _FeedPageState extends State<FeedPage> {
                     //tıklandığında ilgili post un detay sayfasına git
                     onTap: () => _navigateToPostDetail(post),
                     child: Card(
-                      //dış kenar boşlıkları
                       margin: const EdgeInsets.symmetric(
                           vertical: 8, horizontal: 16),
                       child: Padding(

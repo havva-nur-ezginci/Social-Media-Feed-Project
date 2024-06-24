@@ -30,13 +30,11 @@ class _MyAppState extends State<MyApp> {
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         appBarTheme: const AppBarTheme(
-          color: Color.fromARGB(255, 132, 184, 72), // App bar background color
-          elevation: 0, // App bar shadow effect
+          color: Color.fromARGB(255, 132, 184, 72),
+          elevation: 0,
           iconTheme: IconThemeData(color: Colors.white),
           titleTextStyle: TextStyle(
-              color: Colors.white,
-              fontSize: 30,
-              fontWeight: FontWeight.bold), // App bar icon color
+              color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
         ),
       ),
       home: const FeedPage(),

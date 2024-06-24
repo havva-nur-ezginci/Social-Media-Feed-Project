@@ -15,8 +15,7 @@ class PostDetailScreen extends StatelessWidget {
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Padding(
-          padding: const EdgeInsets.all(
-              16.0), // Tüm kenarlar için 16 birimlik padding
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -64,8 +63,7 @@ class PostDetailScreen extends StatelessWidget {
                 child: Text(
                   post.body,
                   style: const TextStyle(fontSize: 16),
-                  textAlign: TextAlign
-                      .justify, // metni her iki kenara yaslayarak hizalar
+                  textAlign: TextAlign.justify,
                 ),
               ),
               const SizedBox(height: 16),
